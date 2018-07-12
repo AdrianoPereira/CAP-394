@@ -1,0 +1,91 @@
+---
+title: "Strings"
+output:   
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Splitting
+
+
+```{r}
+name <- "Edgar Allan Poe"
+names <- strsplit(name," ")
+names
+names <- unlist(names)
+names
+length(names)
+head(names,n=1)
+tail(names,n=1)
+```
+
+Remember that everything can be vectors!
+```{r}
+strsplit(c("a b c","d e f g","h","i j")," ")
+```
+
+## Joining
+"Edgar Allan Poe" -> "Poe, E. A."
+```{r}
+name <- "Edgar Allan Poe"
+names <- unlist(strsplit(name," "))
+parts <- length(names)
+last <- tail(names,n=1)
+firsts <- head(names,n=parts-1)
+firsts
+paste(last,firsts)
+```
+Remember vectors!
+
+<b>EVIL CODE ALERT</b>
+```{r}
+paste(substring(firsts, 1, 1),".",sep = "")
+paste(paste(substring(firsts, 1, 1),".",sep = ""),collapse = "")
+paste(last,", ",paste(paste(substring(firsts, 1, 1),".",sep = ""),collapse = ""),sep="")
+```
+
+## Regular Expressions
+
+### grep
+
+```{r}
+names <- c("Edgar Allan Poe","Edgar Rice Burroughs","Alanis Morissette","Allan Quatermain")
+grep("Allan",names)
+grep("^Allan",names)
+grep("Allan|Edgar",names)
+grep("^[Allan|Alan]",names)
+grep("n$",names)
+```
+
+<tt>grepl</tt> may be more useful:
+```{r}
+grepl("Allan",names)
+grepl("^Allan",names)
+grepl("Allan|Edgar",names)
+grepl("^[Allan|Alan]",names)
+grepl("n$",names)
+```
+
+### gsub
+
+```{r}
+text <- "I think.... I hesitate... too.. much."
+gsub(".","",text)
+gsub("\\.","",text)
+gsub("[\\.]{2,}","",text)
+```
+
+### gregexpr/regmatches
+
+```{r}
+text <- "...used 9920 pounds of flour, 3960 pounds of cheese, 1763.5 pounds of mushrooms, 1984 pounds of tomato puree, and 1984 pounds of chopped tomatoes..."
+gregexpr("[0-9.]+",text)
+regmatches(text,gregexpr("[0-9.]+",text))
+numbers <- unlist(regmatches(text,gregexpr("[0-9.]+",text)))
+as.numeric(numbers)
+```
