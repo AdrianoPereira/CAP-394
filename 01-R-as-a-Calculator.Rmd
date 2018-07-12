@@ -1,0 +1,20 @@
+---
+title: "R as a Calculator"
+output:   
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Calculator
+
+R can be used as a simple calculator:
+
+```{r}
+a <- 12
+b <- 26
+a+b
+```
