@@ -1,0 +1,178 @@
+---
+title: "Operations with Vectors"
+output:   
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Basic Operations with Vectors
+
+This is the monthly average temperature in Baltimore (from http://www.rssweather.com/climate/Maryland/Baltimore/)
+
+```{r}
+tempHi <- c(41.2,44.8,53.9,64.5,73.9,82.7,87.2,85.1,78.2,67.0,56.3,46.0)
+tempHi
+```
+
+We can label the vectors' 
+elements!
+```{r}
+months <- c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+names(tempHi) <- months
+tempHi
+```
+
+
+Other way to do this:
+```{r}
+otherTemp <- c(Jan=41.2,Feb=44.8,Mar=53.9,Apr=64.5,May=73.9,Jun=82.7,
+               Jul=87.2,Aug=85.1,Sep=78.2,Oct=67.0,Nov=56.3,Dec=46.0)
+otherTemp
+names(otherTemp)
+```
+
+Let's also get the lower temperatures:
+
+```{r}
+tempLo <- c(23.5,26.1,33.6,42.0,51.8,60.8,65.8,63.9,56.6,43.7,34.7,27.3)
+```
+
+Now we can do simple operations on the whole vectors.
+
+```{r}
+range <- tempHi-tempLo
+range
+```
+
+Convert it to Celsius:
+
+```{r}
+tempHiC <- (5/9) * (tempHi - 32)
+tempHiC
+```
+
+Is this month too cold?
+
+```{r}
+tooCold <- (((5/9) * (tempLo - 32)) < 0)
+tooCold
+```
+
+### Accessing Elements in a Vector
+
+By indexes:
+
+```{r}
+tempHi[7] # July
+tempHi[12] # December
+
+```
+
+By ranges:
+```{r}
+tempHi[7:9] # July-September
+```
+
+By lists:
+
+```{r}
+tempHi[c(11:12,1:2)] # Nov-Feb
+```
+
+By sequences:
+
+```{r}
+tempHi[seq(2,12,2)] # Even months
+```
+
+Subsetting:
+```{r}
+tempHiC[tempHiC > 20] 
+```
+
+### Mathematical Operations in Vectors
+
+```{r}
+min(tempHiC)
+max(tempHiC)
+mean(tempHiC)
+sd(tempHiC)
+```
+
+Subsetting (again):
+
+```{r}
+tempHiC[tempHiC > mean(tempHiC)] 
+```
+
+## Recycling Rule
+
+Suppose a simple model for global warming:
+
+```{r}
+hotter <- tempHiC + 10
+hotter
+hotter-tempHiC
+```
+
+It's not going to be linear... let's try a more sensible one:
+
+```{r}
+hotter <- tempHiC + c(3,3,2,2,2,1,1,1,1,2,2,3)
+hotter
+hotter-tempHiC
+```
+
+So we can add a scalar and a vector to another vector. What if they're not the same size?
+
+```{r}
+hotter <- tempHiC + c(3,2,1)
+hotter
+hotter-tempHiC
+```
+
+
+The *Recycling Rule* states that the shorter vector values' are recycled. We get warnings when the lenght of the longer is not a multiple of the lenght of the shorter.
+
+```{r}
+hotter <- tempHiC + c(3,2,1,0,-1)
+hotter
+hotter-tempHiC
+```
+
+## Missing Data in Vectors
+
+```{r}
+avgTempSJC <- c(22.2,22.4,21.6,19.6,17,16.1,NA,17.1,18.8,19.4,20.3,21.4)
+names(avgTempSJC) <- c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+avgTempSJC
+```
+
+Problems with some operators when some values are NAs:
+```{r}
+min(avgTempSJC)
+max(avgTempSJC)
+mean(avgTempSJC)
+sd(avgTempSJC)
+```
+
+We need to be clear about the existence of NAs:
+```{r}
+min(avgTempSJC,na.rm = TRUE)
+max(avgTempSJC,na.rm = TRUE)
+mean(avgTempSJC,na.rm = TRUE)
+sd(avgTempSJC,na.rm = TRUE)
+```
+
+### Filtering by NAs
+```{r}
+is.na(avgTempSJC)
+!is.na(avgTempSJC)
+avgTempSJC[is.na(avgTempSJC)]
+avgTempSJC[!is.na(avgTempSJC)]
+```
+

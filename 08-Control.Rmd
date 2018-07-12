@@ -1,0 +1,124 @@
+---
+title: "Control"
+output:   
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Conditionals
+
+
+```{r}
+avgTempSJC <- c(22.2,22.4,21.6,19.6,17,16.1,15.6,17.1,18.8,19.4,20.3,21.4)
+names(avgTempSJC) <- c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+
+if (avgTempSJC["Jan"] > 20) 
+  {
+  "Good!"
+  } else {
+  "Bad!"
+  }
+```
+
+
+We can assign results of conditionals to variables.
+
+```{r}
+weatherJan <- if (avgTempSJC["Jan"] > 20) {
+  "Good!"
+} else {
+  "Bad!"
+}
+weatherJan
+```
+
+Remember: think in vectors!
+Simple IFs don't work with vectors...
+```{r}
+if (avgTempSJC > 20) {
+  "Good!"
+} else {
+  "Bad!"
+}
+```
+
+... but this works:
+
+```{r}
+weather <- ifelse((avgTempSJC > 20), "Good","Bad")
+weather
+```
+
+## Loops
+
+Fors...
+
+```{r}
+for(i in 1:12) {
+  print(avgTempSJC[i])
+}
+for(month in avgTempSJC) {
+  print(month)
+}
+```
+
+... and whiles too!
+```{r}
+count = 1
+while(count <= 12) {
+  print(avgTempSJC[count])
+  count <- count+1
+}
+```
+
+Other loop: repeat
+```{r}
+count = 1
+repeat {
+  if (count > 12) {
+    break
+  } else {
+    print(avgTempSJC[count])
+    count <- count+1
+  }
+}
+```
+
+### Skipping steps: next
+
+```{r}
+for(i in 1:12) 
+  {
+  if (avgTempSJC[i] > 20) { next }
+  print(avgTempSJC[i])
+  }
+```
+
+## Major annoyance!
+
+This works:
+```{r}
+if (avgTempSJC["Jan"] > 20) 
+  {
+  "Good!"
+  } else {
+  "Bad!"
+  }
+```
+
+This too:
+```{r}
+if (avgTempSJC["Jan"] > 20) { "Good!" } else { "Bad!" }
+```
+
+This doesn't:
+```{r error=TRUE}
+if (avgTempSJC["Jan"] > 20) 
+  { "Good!" } 
+  else { "Bad!" }
+```
+

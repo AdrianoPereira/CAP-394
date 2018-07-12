@@ -1,0 +1,33 @@
+---
+title: "Primitive Types in R"
+output:   
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Primitive Data Types
+
+```{r}
+l <- FALSE
+n <- 12.333
+i <- 64L
+cx <- 3+2i
+cc <- 'programming'
+```
+
+```{r error=TRUE}
+class(l) 
+class(n)
+class(i)
+class(cx)
+class(cc)
+```
+
+
+
+
+

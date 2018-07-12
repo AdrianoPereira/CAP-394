@@ -1,0 +1,66 @@
+---
+title: "Vectors in R"
+output:   
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Vectors
+
+```{r}
+l <- c(FALSE,FALSE,TRUE,FALSE)
+n <- c(12.333,12.389,12.918,13,14.021)
+cc <- c('programming','r','python')
+```
+```{r}
+length(l)
+class(l) 
+length(n)
+class(n)
+length(cc)
+class(cc)
+```
+
+### Creating empty Vectors
+
+```{r}
+v <- vector(length = 10)
+length(v)
+class(v)
+v
+```
+
+```{r}
+v <- vector(length = 10,mode = "numeric")
+length(v)
+class(v)
+v
+```
+
+
+## What if we mix types?
+
+```{r}
+m1 <- c('R','is','Easy',FALSE)
+class(m1) 
+m1
+```
+```{r}
+m2 <- c(1,2,3,123.123)
+class(m2)
+m2
+```
+```{r}
+m3 <- c('programming',3000,'lines')
+class(m3)
+m3
+```
+```{r}
+m4 <- c(-2,-1,FALSE,TRUE,2)
+class(m4)
+m4
+```
