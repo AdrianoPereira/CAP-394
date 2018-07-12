@@ -361,7 +361,7 @@ Creating Data Frames in code is not practical. Let's read them from files.
 
 ### .. as CSV
 
-Let's read a CSV file into R (check it here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/Taubate.csv>)
+Let's read a CSV file into R (get it here: <https://raw.githubusercontent.com/rafaeldcsantos/CAP-394/master/Data/Taubate.csv>)
 
 ``` r
 taubateWeather <- read.csv(file="Data/Taubate.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
@@ -456,7 +456,7 @@ Let's save it.
 write.csv(taubateWeather, file = "Data/Taubate-Fixed.csv")
 ```
 
-See it here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/Taubate-Fixed.csv>
+See it here: <https://github.com/rafaeldcsantos/CAP-394/blob/master/Data/Taubate-Fixed.csv>
 
 ### .. as R Data
 
@@ -466,7 +466,7 @@ We can save R objects (including data frames) like this:
 dump("taubateWeather", file = "Data/Taubate-Fixed.R")
 ```
 
-See the file here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/Taubate-Fixed.R>
+See the file here: <https://github.com/rafaeldcsantos/CAP-394/blob/master/Data/Taubate-Fixed.R>
 
 We can read dumped objects with <tt>source</tt>:
 
@@ -498,12 +498,12 @@ v <- pi*2;
 dump(c("taubateWeather","l","n","cc","v"), file = "Data/SomeMixedData.R")
 ```
 
-See the file here: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/SomeMixedData.R>
+See the file here: <https://github.com/rafaeldcsantos/CAP-394/blob/master/Data/SomeMixedData.R>
 
 Missing Values (again)
 ----------------------
 
-File with missing data: <https://github.com/rafaeldcsantos/CAP386/blob/master/Data/TaubateMissing.R>
+File with missing data: <https://raw.githubusercontent.com/rafaeldcsantos/CAP-394/master/Data/TaubateMissing.csv>
 
 ``` r
 taubateMissing <- read.csv(file="Data/TaubateMissing.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
