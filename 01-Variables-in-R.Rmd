@@ -1,0 +1,37 @@
+---
+title: "Variables in R"
+output:   
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Assignments
+
+These are three ways we can do assignments:
+
+```{r}
+a <- 10
+b = 20
+30 -> c
+```
+
+## Reading Variables
+These are some of the ways we can inspect the variables' values:
+
+```{r}
+print(a)
+b
+cat(c)
+```
+
+## Listing and Removing Variables
+
+```{r error=TRUE}
+ls()
+rm(b)
+print(b)
+```
